@@ -1,4 +1,4 @@
-![Logo](/img/m%2B%2B.png)
+![Logo](../img/m%2B%2B.png)
 # The M++ Programming Language
 ---------------------------
 ## Documentation

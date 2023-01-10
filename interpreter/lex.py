@@ -17,7 +17,6 @@ def plot_numbers(x, y):
 
 # Math Library for M++
 def math(line):
-    try:
         if(line[0] == "Math.Average"):
             print((float(line[1]) + float(line[3])) / 2)
         if(line[0] == "Math.Max"):
@@ -27,8 +26,6 @@ def math(line):
                 print(float(line[3]))
         if(line[0] == "Math.Graph"):
             plot_numbers(float(line[1]), float(line[3]))
-    except:
-        err("m++ interpreter error")
 # Official Lexer for M++
 # All language libraries should be applied
 def lex(line):  
@@ -58,15 +55,20 @@ def lex_file(filename):
                 line_num += 1
                 # Keep print(words) for debugging
                 # print(words)
-                if("Math" in words[0]):
-                    math(words)
-                else:    
-                    lex(words)
+                try:
+                    if("Math" in words[0]):
+                        math(words)
+                    else:    
+                        lex(words)
+                except:
+                    err("m++ interpreter error")
+                    err("line number: " + str(line_num - 1))
 
-# try:
-lex_file(sys.argv[1])
-# except:
-#     err("m++ error")
-#     print("No file was provided to the m++ compiler")
-#     fix("\nHow to fix: ")
-#     print("./m++ my_file.m++")
+
+try:
+    lex_file(sys.argv[1])
+except:
+    err("m++ error")
+    print("No real file was provided to the m++ compiler")
+    fix("\nHow to fix: ")
+    print("./m++ my_file.m++")
