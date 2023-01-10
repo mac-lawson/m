@@ -1,9 +1,6 @@
-subtract 1 and 4
-add 4.5 and 4.5
-divide 4 and 2
-Math.Average 4 and 8
-return my
-return name
-return is
-return mac
-breakln()
+// Adding two numbers
+add 5 and 4
+// Subtracting two numbers
+subtract 4 and 1
+// Dividing two numbers
+divide 2 and 4

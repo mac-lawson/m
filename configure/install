@@ -1,0 +1,15 @@
+#!/bin/bash
+echo ""
+echo ""
+
+echo "Installing M++"
+sleep 2
+echo ""
+echo ""
+
+
+cd ..
+# rm -rf configure
+
+chmod +x m++
+
