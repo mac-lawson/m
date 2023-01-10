@@ -1,10 +1,22 @@
 # Official Language Interpreter for M++
 # Official Language Interpreter for M++
-
+class errors:
+    file = "No real file was provided to the m++ compiler"
 import sys
 import matplotlib.pyplot as plt
+import subprocess
 def err(skk): print("\033[91m {}\033[00m" .format(skk))
 def fix(skk): print("\033[92m {}\033[00m" .format(skk))
+
+# Multiword String management
+def put(line):
+    for i in range(1,len(line)):
+        if i != len(line): 
+            print(line[i], end=' ')
+        else:
+            print(line[i], end='')
+    print("\n")
+
 
 # Graphing Library for M++
 
@@ -26,33 +38,56 @@ def math(line):
                 print(float(line[3]))
         if(line[0] == "Math.Graph"):
             plot_numbers(float(line[1]), float(line[3]))
+
+
+
 # Official Lexer for M++
 # All language libraries should be applied
 def lex(line):  
+    # BASIC MATH
     if(line[0] == "add"):
         print(float(line[1]) + float(line[3]))
     if(line[0] == "subtract"):
         print(float(line[1]) - float(line[3]))
     if(line[0] == "divide"):
         print(float(line[1]) / float(line[3]))
-    if(line[0] == "return"):
-        print(str(line[1]))
+    if(line[0] == "multiply"):
+        print(float(line[1]) * float(line[3]))
+    if(line[0] == "mod"):
+        print(float(line[1]) % float(line[3]))
+    
+    # STRING HANDLING
+    if(line[0] == "put"):
+        put(line)
     if(line[0] == "breakln()"):
         print("")
 
+
+
+
+# Function that interprets files
 def lex_file(filename):
+    import re
     line_num = 1
     with open(filename) as f:
         for line in f:
-            words = line.split()
-            # Comments and blank spaces
+            words = re.findall(r'\b\w+\b', line)
             if("//" in words):
-                i = 0
+                continue
             if(len(words) == 0):
-                i = 0
+                continue
             else:
-                globals()[f'line_{line_num}'] = words
+                quoted_strings = [word for word in words if '"' in word]
+                if quoted_strings:
+                    quoted_string = ' '.join(word.replace('"','') for word in quoted_strings)
+                    words = [word for word in words if '"' not in word]
+                    words.append(quoted_string)
+                    globals()[f'line_{line_num}'] = words
+                else:
+                    globals()[f'line_{line_num}'] = words
                 line_num += 1
+
+
                 # Keep print(words) for debugging
                 # print(words)
                 try:
@@ -69,6 +104,6 @@ try:
     lex_file(sys.argv[1])
 except:
     err("m++ error")
-    print("No real file was provided to the m++ compiler")
+    print(errors.file)
     fix("\nHow to fix: ")
     print("./m++ my_file.m++")

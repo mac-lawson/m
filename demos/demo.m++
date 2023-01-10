@@ -1,0 +1,11 @@
+// demo.m++
+
+put "Hello World!"
+put "Welcome to the basic m plus plus Demo"
+
+divide 2 and .87
+
+multiply 4 and 2
+
+divide 5 and 1
+
