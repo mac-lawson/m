@@ -4,5 +4,4 @@
 ### A language you can understand
 ### Documentation
 ---
-
-#### Basic Operations
+Documentation can be found at https://mac-lawson.github.io/m/
