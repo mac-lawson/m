@@ -26,3 +26,7 @@ To create a new m++ project, you can use the ProjectManager (projmon) which is i
 ```
 ./projmon project_name 
 ```
+Your project was created inside of the 'Projects' directory. You can now open it to view your project:
+- The default file for M++, class.m++
+
+

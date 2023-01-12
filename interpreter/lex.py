@@ -1,5 +1,11 @@
 # Official Language Interpreter for M++
 # Official Language Interpreter for M++
+
+# VAR ARRAY FOR COMPILE
+
+run_vars = ["test"]
+
+# ERROR HANDLING
 class errors:
     file = "No real file was provided to the m++ compiler"
 import sys
@@ -43,6 +49,10 @@ def math(line):
 
 # Official Lexer for M++
 # All language libraries should be applied
+# In m++, variables are stored as env vars. 
+import os
+env_var = os.environ
+
 def lex(line):  
     # BASIC MATH
     if(line[0] == "add"):
@@ -59,8 +69,10 @@ def lex(line):
     # STRING HANDLING
     if(line[0] == "put"):
         put(line)
-    if(line[0] == "breakln()"):
+    if(line[0] == "break"):
         print("")
+
+
 
 
 
@@ -93,6 +105,9 @@ def lex_file(filename):
                 try:
                     if("Math" in words[0]):
                         math(words)
+                    if("include" in words[0]):
+                        #TODO add the include function
+                        include(words)
                     else:    
                         lex(words)
                 except:
